@@ -1,6 +1,6 @@
 import { type ReactElement, useEffect, useState } from "react";
 import "./App.css";
-import { FaLinkedin, FaEnvelope, FaGithub, FaReact, FaPython, FaDatabase, FaDownload, FaBars, FaTimes } from "react-icons/fa";
+import { FaLinkedin, FaEnvelope, FaGithub, FaReact, FaPython, FaDatabase, FaDownload } from "react-icons/fa";
 import { SiDjango, SiTypescript, SiMysql } from "react-icons/si";
 
 interface Project {
@@ -157,7 +157,9 @@ function App() {
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen(open => !open)}
         >
-          {menuOpen ? <FaTimes /> : <FaBars />}
+          <span className="menu-toggle-line" />
+          <span className="menu-toggle-line" />
+          <span className="menu-toggle-line" />
         </button>
         <nav className={menuOpen ? "nav-open" : ""}>
           <ul>
