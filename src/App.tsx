@@ -1,6 +1,6 @@
 import { type ReactElement, useEffect, useState } from "react";
 import "./App.css";
-import { FaLinkedin, FaEnvelope, FaGithub, FaReact, FaPython, FaDatabase, FaDownload } from "react-icons/fa";
+import { FaLinkedin, FaEnvelope, FaGithub, FaReact, FaPython, FaDatabase, FaDownload, FaBars, FaTimes } from "react-icons/fa";
 import { SiDjango, SiTypescript, SiMysql } from "react-icons/si";
 
 interface Project {
@@ -64,6 +64,7 @@ function App() {
   const [deleting, setDeleting] = useState(false);
   const [projects, setProjects] = useState<Project[]>(DEFAULT_PROJECTS);
   const [skills, setSkills] = useState<Skill[]>([]);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:8081/api/projects")
@@ -141,12 +142,21 @@ function App() {
     <div className="container">
       <header className="top-navbar">
         <div className="nav-logo">JS</div>
-        <nav>
+        <button
+          type="button"
+          className="menu-toggle"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen(open => !open)}
+        >
+          {menuOpen ? <FaTimes /> : <FaBars />}
+        </button>
+        <nav className={menuOpen ? "nav-open" : ""}>
           <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#home" onClick={() => setMenuOpen(false)}>Home</a></li>
+            <li><a href="#about" onClick={() => setMenuOpen(false)}>About</a></li>
+            <li><a href="#projects" onClick={() => setMenuOpen(false)}>Projects</a></li>
+            <li><a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a></li>
           </ul>
         </nav>
       </header>
