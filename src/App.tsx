@@ -26,6 +26,14 @@ const SKILL_ICONS: Record<string, ReactElement> = {
   sql: <FaDatabase />,
 };
 
+const DEFAULT_SKILLS: Skill[] = [
+  { id: -1, name: "React" },
+  { id: -2, name: "Django" },
+  { id: -3, name: "Python" },
+  { id: -4, name: "SQL" },
+  { id: -5, name: "MySQL" },
+];
+
 const DEFAULT_PROJECTS: Project[] = [
   {
     id: -1,
@@ -63,7 +71,7 @@ function App() {
   const [charIndex, setCharIndex] = useState(0);
   const [deleting, setDeleting] = useState(false);
   const [projects, setProjects] = useState<Project[]>(DEFAULT_PROJECTS);
-  const [skills, setSkills] = useState<Skill[]>([]);
+  const [skills, setSkills] = useState<Skill[]>(DEFAULT_SKILLS);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -79,7 +87,7 @@ function App() {
       .catch(() => {});
     fetch("http://localhost:8081/api/skills")
       .then(r => r.json())
-      .then(setSkills)
+      .then((apiSkills: Skill[]) => setSkills(apiSkills.length ? apiSkills : DEFAULT_SKILLS))
       .catch(() => {});
   }, []);
 
